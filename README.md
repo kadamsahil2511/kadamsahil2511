@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @kadamsahil2511
-- 🌱 I’m currently learning Web Development
-- 📓 I Share my learnings on X @kadamsahil2511 (Twitter) 
+- 🌱 I’m a Web developer
+- 📫 Reach me on X @kadamsahil2511 (Twitter)
 <!--- 💞️ I’m looking to collaborate ...
 - 📫 How to reach me ...-->
 
