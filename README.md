@@ -24,7 +24,7 @@ While I may not have a long list of achievements yet, I'm constantly working on 
 <a href="https://www.linkedin.com/in/kadamsahil2509/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Sahil Kadam" height="30" width="40" /></a>
 <a href="https://www.instagram.com/kadamsahil2528/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@kadamsahil2528" height="30" width="40" /></a>
 <a href="https://www.youtube.com/channel/UC1lb-p02HMyNOsXB3IHyKbw" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="kadamsahil" height="30" width="40" /></a>
-<a href="https://www.snapchat.com/add/kadamsahil2511" target="blank"><img align="center" src="https://img.icons8.com/fluency/48/000000/snapchat.png" alt="Snapchat" height="30" width="40" /></a>
+<a href="https://www.snapchat.com/add/kadamsahil2511" target="blank"><img align="center" src="https://img.icons8.com/fluency/48/000000/snapchat.png" alt="Snapchat" height="40" width="40" /></a>
 </p>
 
 ## Languages and Tools
