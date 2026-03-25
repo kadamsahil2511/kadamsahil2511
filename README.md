@@ -2,7 +2,7 @@
 
 ## About Me
 
-Hey there! I'm Sahil S. Kadam, a first-year B.Tech student with a passion for computer science and technology. While I may be at the beginning of my journey, I'm excited about the endless possibilities and opportunities that lie ahead. 🚀
+Hey there! I'm Sahil S. Kadam, a second-year B.Tech student with a passion for computer science and technology. While I may be at the beginning of my journey, I'm excited about the endless possibilities and opportunities that lie ahead. 🚀
 
 ## What I Bring to the Table
 
