@@ -346,6 +346,9 @@ function Header({ path, navigate }: { path: RoutePath; navigate: (path: RoutePat
             {routes[routePath].label}
           </a>
         ))}
+        <a href="/assets/Sahil_Shahaji_Kadam_CV.pdf" className="text-[var(--muted)] no-underline hover:text-[var(--text)]">
+          Resume
+        </a>
       </nav>
     </header>
   )
@@ -549,11 +552,6 @@ function App() {
       {path === '/' ? <HomePage /> : null}
       {path === '/work/' ? <WorkPage /> : null}
       {path === '/proof/' ? <ProofPage /> : null}
-      <footer className="text-xs leading-4">
-        <a href="/assets/Sahil_Shahaji_Kadam_CV.pdf" className="text-[var(--muted)] no-underline hover:text-[var(--text)]">
-          Resume
-        </a>
-      </footer>
     </div>
   )
 }
