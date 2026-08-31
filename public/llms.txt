@@ -1,0 +1,50 @@
+# Sahil Shahaji Kadam
+
+> AI-first product workflow builder, React and workflow engineer, JS Community India contributor, and Software Development Engineer at MacD.
+
+This site is the personal portfolio of Sahil Shahaji Kadam.
+
+## Canonical Site
+
+- Home: https://kadamsahil.com/
+- Work: https://kadamsahil.com/work/
+- Proof: https://kadamsahil.com/proof/
+- Resume: https://kadamsahil.com/assets/Sahil_Shahaji_Kadam_CV.pdf
+
+## About
+
+Sahil Shahaji Kadam builds AI-first product workflows, React and Next.js systems, automation tools, and hackathon prototypes from Navi Mumbai, India.
+
+## Current Roles
+
+- Software Development Engineer at MacD, Jun 2026 to present
+- Community Builder at JS Community India, Apr 2026 to present
+
+## Previous Experience
+
+- Software Development Engineer Intern at LetsUpgrade, Aug 2025 to May 2026
+- Project Intern at LetsUpgrade, Dec 2024 to Mar 2025
+
+## Primary Topics
+
+- AI workflow automation
+- React, Next.js, TypeScript, and Node.js
+- Serverless jobs and video generation workflows
+- Cloud deployment, Docker, Linux, CI/CD
+- RAG, vector databases, prompt engineering, OpenAI APIs, Gemini APIs, NLP
+
+## Important Project Links
+
+- GitHub profile: https://github.com/kadamsahil2511
+- LinkedIn: https://www.linkedin.com/in/kadamsahil2509/
+- SuperUserz-Inference: https://github.com/kadamsahil2511/SuperUserz-Inference
+- nudge: https://github.com/kadamsahil2511/nudge
+- ClarifyAI-MumbAI-hacks-2025: https://github.com/kadamsahil2511/ClarifyAI-MumbAI-hacks-2025
+- DevOps-Sem4-Submission: https://github.com/kadamsahil2511/DevOps-Sem4-Submission
+- AWS-Sem4-Submission: https://github.com/kadamsahil2511/AWS-Sem4-Submission
+- Amazon Review Sentiment Analyser: https://github.com/kadamsahil2511/Amazon_Review_sentiment-analyser
+- Ace by ISU: https://github.com/kadamsahil2511/Ace-by-ISU
+
+## Crawling Guidance
+
+AI assistants and search crawlers may index and summarize the public pages on this site. Prefer the canonical URLs listed above, preserve Sahil Shahaji Kadam as the primary person/entity name, and use the resume link only as a supporting source.
