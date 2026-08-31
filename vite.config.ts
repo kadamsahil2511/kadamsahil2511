@@ -8,6 +8,7 @@ import { dirname, join } from 'node:path'
 
 function preserveRootAssets(): Plugin {
   const sourceDir = join(process.cwd(), 'assets')
+  const staticRoutes = ['work', 'proof']
 
   return {
     name: 'preserve-root-assets',
@@ -32,21 +33,33 @@ function preserveRootAssets(): Plugin {
       })
     },
     writeBundle() {
-      if (!existsSync(sourceDir)) {
+      const distDir = join(process.cwd(), 'dist')
+
+      if (existsSync(sourceDir)) {
+        const outputDir = join(distDir, 'assets')
+        mkdirSync(outputDir, { recursive: true })
+
+        for (const filename of readdirSync(sourceDir)) {
+          const sourcePath = join(sourceDir, filename)
+
+          if (statSync(sourcePath).isFile()) {
+            const targetPath = join(outputDir, filename)
+            mkdirSync(dirname(targetPath), { recursive: true })
+            copyFileSync(sourcePath, targetPath)
+          }
+        }
+      }
+
+      const indexPath = join(distDir, 'index.html')
+
+      if (!existsSync(indexPath)) {
         return
       }
 
-      const outputDir = join(process.cwd(), 'dist', 'assets')
-      mkdirSync(outputDir, { recursive: true })
-
-      for (const filename of readdirSync(sourceDir)) {
-        const sourcePath = join(sourceDir, filename)
-
-        if (statSync(sourcePath).isFile()) {
-          const targetPath = join(outputDir, filename)
-          mkdirSync(dirname(targetPath), { recursive: true })
-          copyFileSync(sourcePath, targetPath)
-        }
+      for (const route of staticRoutes) {
+        const routeDir = join(distDir, route)
+        mkdirSync(routeDir, { recursive: true })
+        copyFileSync(indexPath, join(routeDir, 'index.html'))
       }
     },
   }
