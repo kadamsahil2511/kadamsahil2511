@@ -23,7 +23,10 @@ type RowItem = {
 type TimelineGroup = {
   label: string
   eyebrow?: string
-  items: string[]
+  items: {
+    text: string
+    links?: RowLink[]
+  }[]
 }
 
 const routes: Record<RoutePath, { label: string; title: string; description: string }> = {
@@ -31,7 +34,7 @@ const routes: Record<RoutePath, { label: string; title: string; description: str
     label: 'Home',
     title: 'Sahil Shahaji Kadam',
     description:
-      'Sahil Shahaji Kadam is a Navi Mumbai AI-first builder, React and workflow engineer, JS Community India contributor, and MacD SDE arc enjoyer.',
+      'Sahil Shahaji Kadam is a Navi Mumbai AI-first builder, Full Stack Developer at Noun Asia, MacD project contributor, and JS Community India community builder.',
   },
   '/work/': {
     label: 'Work',
@@ -47,6 +50,8 @@ const routes: Record<RoutePath, { label: string; title: string; description: str
 
 const profileLinks: LinkItem[] = [
   { label: 'Email', href: 'mailto:kadamsahil2511@gmail.com' },
+  { label: 'WhatsApp', href: 'https://wa.me/917697935839' },
+  { label: 'Call', href: 'tel:+917697935839' },
   { label: 'GitHub', href: 'https://github.com/kadamsahil2511' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kadamsahil2509/' },
   { label: 'Resume', href: '/assets/Sahil_Shahaji_Kadam_CV.pdf' },
@@ -54,29 +59,29 @@ const profileLinks: LinkItem[] = [
 
 const experience: RowItem[] = [
   {
-    title: 'Software Development Engineer, MacD',
+    title: 'Full Stack Developer, Noun Asia',
     description:
-      'Current SDE arc since Jun 2026: shipping product surfaces, debugging the obvious after the coffee hits, and turning workflow chaos into features that survive real users.',
-    meta: 'Jun 2026 - Present',
+      'Building full-stack product systems for the MacD project, owning features from workflow design and implementation through production debugging and delivery.',
+    meta: '8 May 2026 - Present',
   },
   {
     title: 'Community Builder, JS Community India',
     description:
-      'Building with JS Community India since Apr 2026 across events, demos, community ops, and the delightful mess where AI workflows meet JavaScript people.',
+      'Building with JS Community India since Apr 2026 across events, demos, community ops, and the beautiful mess where AI workflows meet JavaScript people.',
     meta: 'Apr 2026 - Present',
   },
   {
     title: 'Software Development Engineer Intern, LetsUpgrade',
     description:
-      'Led the video generation module for an AI-integrated LMS, reduced generation time from 15 minutes to 3 minutes, and moved heavy rendering into asynchronous serverless background jobs.',
-    meta: 'Aug 2025 - May 2026',
+      'Led the video generation module for an AI-integrated LMS, cut generation time from 15 minutes to 3 minutes, and moved heavy rendering into async serverless jobs so the app could stop sweating in public.',
+    meta: '4 Aug 2025 - 7 May 2026',
     links: [{ label: 'Company', href: 'https://letsupgrade.in/' }],
   },
   {
     title: 'Project Intern, LetsUpgrade',
     description:
-      'Built AI-driven automation tools for data gathering and internal workflows, improving process speed by 90% and reducing manual task time by 6x.',
-    meta: 'Dec 2024 - Mar 2025',
+      'Built AI-driven automation tools for data gathering and internal workflows, making processes 90% faster and reducing manual task time by 6x. Spreadsheet suffering reduced. Society advanced.',
+    meta: 'Dec 2024; Feb - Mar 2025',
   },
 ]
 
@@ -168,20 +173,20 @@ const achievements: RowItem[] = [
   {
     title: 'Hyperthon India Hackathon, Mumbai Edition',
     description: '1st Prize, INR 25,000.',
-    meta: '2025',
+    meta: 'Oct 2025',
   },
   {
     title: 'Hyperthon India, Bengaluru Round',
     description: 'National Finalist, selected among top regional winners.',
-    meta: '2025',
+    meta: 'Oct 2025',
   },
   {
     title: 'International ASIFA Student Research Paper Conference',
     description: 'Best External Paper Award.',
-    meta: 'Year bucket',
+    meta: 'Jan 2026',
   },
-  { title: 'Imagine Hackathon at PANIIT', description: 'Top 30 teams out of 15,000.', meta: '2025' },
-  { title: 'Elevator Pitch Competition, ITM Business School', description: '1st Place.', meta: 'Year bucket' },
+  { title: 'Imagine Hackathon at PANIIT', description: 'Top 30 teams out of 15,000.', meta: 'Jan 2025' },
+  { title: 'Elevator Pitch Competition, ITM Business School', description: '1st Place.', meta: 'Oct 2024' },
 ]
 
 const talks: RowItem[] = [
@@ -189,59 +194,283 @@ const talks: RowItem[] = [
     title: 'Mumbai Hacks 2025',
     description:
       "Presented to 500+ attendees at the global project launch of MIT's Nanda Project as part of a top-three team.",
-    meta: '2025',
+    meta: 'Nov 2025',
   },
   {
     title: 'Ideation to Prototype',
     description:
       'Guest speaker for Singularity Hackathon, delivering a session on rapid prototyping to engineering students.',
-    meta: '2026',
+    meta: 'Jan 2026',
   },
 ]
 
 const workTimeline: TimelineGroup[] = [
   {
-    label: 'Jun 2026',
-    eyebrow: 'now loading',
-    items: ['MacD SDE arc starts: product, workflows, and bug tickets with plot armor.'],
+    label: '8 May 2026',
+    eyebrow: 'full-time job',
+    items: [
+      {
+        text: 'Joined Noun Asia as a Full Stack Developer and began shipping on the MacD project.',
+        links: [
+          {
+            label: 'Offer letter',
+            href: '/assets/Proof%20of%20work/experience/noun-asia-full-stack-developer/2026-05-offer-letter.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: '7 May 2026',
+    eyebrow: 'completed',
+    items: [
+      {
+        text: 'Completed the LetsUpgrade SDE internship; the final letter confirms the full 4 Aug 2025 - 7 May 2026 tenure.',
+        links: [
+          {
+            label: 'Renewals and completion letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-11-renewals-and-completion.pdf',
+          },
+        ],
+      },
+    ],
   },
   {
     label: 'Apr 2026',
     eyebrow: 'community',
-    items: ['Joined JS Community India work: events, demos, async planning, and JavaScript lore.'],
+    items: [{ text: 'Joined JS Community India work: events, demos, async planning, and JavaScript lore.' }],
   },
   {
-    label: 'May 2026',
-    eyebrow: 'ship',
-    items: ['Wrapped the LetsUpgrade SDE internship after the AI video pipeline got a 5x speed-up.'],
+    label: 'Mar 2026',
+    eyebrow: 'renewed',
+    items: [
+      {
+        text: 'SDE internship renewed again for the March-May term.',
+        links: [
+          {
+            label: 'Renewal letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-11-renewals-and-completion.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Dec 2025',
+    eyebrow: 'renewed term',
+    items: [
+      {
+        text: 'Began the renewed SDE internship term, continuing through February 2026.',
+        links: [
+          {
+            label: 'Renewal letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-11-renewals-and-completion.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Nov 2025',
+    eyebrow: 'renewal',
+    items: [
+      {
+        text: 'Renewal issued for the next Software Development & Engineering internship term.',
+        links: [
+          {
+            label: 'Renewal documents',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-11-renewals-and-completion.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Oct 2025',
+    eyebrow: 'completed',
+    items: [
+      {
+        text: 'Completed the first extended SDE internship term on 31 October.',
+        links: [
+          {
+            label: 'Offer, extension, and completion letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-08-offer-extension-and-completion.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Sep 2025',
+    eyebrow: 'extended',
+    items: [
+      {
+        text: 'SDE internship extended through 31 October.',
+        links: [
+          {
+            label: 'Extension letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-08-offer-extension-and-completion.pdf',
+          },
+        ],
+      },
+    ],
   },
   {
     label: 'Aug 2025',
     eyebrow: 'internship',
-    items: ['Started owning the LMS video generation module at LetsUpgrade.'],
+    items: [
+      {
+        text: 'Moved into Software Development & Engineering at LetsUpgrade and started owning the LMS video generation module.',
+        links: [
+          {
+            label: 'Internship offer',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-sde-internship/2025-08-offer-extension-and-completion.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Mar 2025',
+    eyebrow: 'completed',
+    items: [
+      {
+        text: 'Completed the renewed LetsUpgrade Project Internship on 1 March.',
+        links: [
+          {
+            label: 'Offer and completion letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-project-internship/2025-02-renewal-and-completion.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Feb 2025',
+    eyebrow: 'renewed',
+    items: [
+      {
+        text: 'Project Internship renewed for 1 February - 1 March.',
+        links: [
+          {
+            label: 'Renewal offer',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-project-internship/2025-02-renewal-and-completion.pdf',
+          },
+        ],
+      },
+    ],
   },
   {
     label: 'Dec 2024',
     eyebrow: 'automation',
-    items: ['Started LetsUpgrade project internship focused on AI workflow automation.'],
+    items: [
+      {
+        text: 'Started and completed the initial LetsUpgrade Project Internship, focused on AI workflow automation.',
+        links: [
+          {
+            label: 'Offer and completion letter',
+            href: '/assets/Proof%20of%20work/experience/letsupgrade-project-internship/2024-12-offer-and-completion.pdf',
+          },
+        ],
+      },
+    ],
   },
 ]
 
 const proofTimeline: TimelineGroup[] = [
   {
-    label: '2026',
-    eyebrow: 'year bucket',
-    items: ['Guest speaker for Singularity Hackathon: Ideation to Prototype.'],
+    label: 'Aug 2026',
+    eyebrow: 'mentoring',
+    items: [
+      {
+        text: "Mentored B.Tech CSE students at IdeaFrame'26.",
+        links: [
+          {
+            label: 'Mentorship certificate',
+            href: '/assets/Proof%20of%20work/talks-and-mentoring/2026-08-ideaframe-mentoring/certificate.pdf',
+          },
+          {
+            label: 'Appreciation letter',
+            href: '/assets/Proof%20of%20work/talks-and-mentoring/2026-08-ideaframe-mentoring/appreciation-letter.pdf',
+          },
+        ],
+      },
+    ],
   },
   {
-    label: '2025',
-    eyebrow: 'year bucket',
+    label: 'May 2026',
+    eyebrow: 'peer mentoring',
     items: [
-      'Hyperthon India Mumbai Edition: 1st Prize.',
-      'Hyperthon India Bengaluru Round: National Finalist.',
-      'Imagine Hackathon at PANIIT: Top 30 of 15,000.',
-      'Mumbai Hacks 2025: Nanda Project launch presentation.',
-      'ASIFA and elevator pitch wins live here until a known month appears.',
+      {
+        text: 'Led the peer-mentoring session “SDLC: How Not to Write Slop Code.”',
+        links: [
+          {
+            label: 'Peer mentorship certificate',
+            href: '/assets/Proof%20of%20work/talks-and-mentoring/2026-05-sdlc-peer-mentoring/certificate.pdf',
+          },
+          {
+            label: 'Appreciation letter',
+            href: '/assets/Proof%20of%20work/talks-and-mentoring/2026-05-sdlc-peer-mentoring/appreciation-letter.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Jan 2026',
+    eyebrow: 'award & talk',
+    items: [
+      {
+        text: 'Best External Paper Award at the International ASIFA Student Research Paper Conference.',
+        links: [
+          {
+            label: 'Award certificate',
+            href: '/assets/Proof%20of%20work/achievements/2026-01-asifa-research/certificate.pdf',
+          },
+        ],
+      },
+      {
+        text: 'Guest speaker for “Idea to Prototype” at K.C. College of Engineering and Management Studies and Research.',
+        links: [
+          {
+            label: 'Appreciation letter',
+            href: '/assets/Proof%20of%20work/talks-and-mentoring/2026-01-idea-to-prototype/appreciation-letter.pdf',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Nov 2025',
+    eyebrow: 'presentation',
+    items: [{ text: "Presented at Mumbai Hacks during the global launch of MIT's Nanda Project." }],
+  },
+  {
+    label: 'Oct 2025',
+    eyebrow: 'hackathons',
+    items: [
+      { text: 'Won 1st Prize at Hyperthon India, Mumbai Edition.' },
+      { text: 'Competed as a National Finalist at the Hyperthon India Bengaluru round.' },
+    ],
+  },
+  {
+    label: 'Jan 2025',
+    eyebrow: 'hackathon',
+    items: [{ text: 'Placed in the top 30 of 15,000 teams at Imagine Hackathon, PANIIT.' }],
+  },
+  {
+    label: 'Oct 2024',
+    eyebrow: 'competition',
+    items: [
+      {
+        text: 'Won 1st Place in the Elevator Pitch Competition at E-FEST 2024.',
+        links: [
+          {
+            label: 'Achievement certificate',
+            href: '/assets/Proof%20of%20work/achievements/2024-10-elevator-pitch/certificate.pdf',
+          },
+        ],
+      },
     ],
   },
 ]
@@ -427,11 +656,28 @@ function MonthTimeline({ groups }: { groups: TimelineGroup[] }) {
         <article key={group.label} className="grid gap-1">
           <div className="min-w-0">
             <p className="text-sm font-bold leading-5 text-[var(--text)]">{group.label}</p>
-            {group.eyebrow ? <p className="text-xs leading-4 text-[var(--muted)]">{group.eyebrow}</p> : null}
+            {group.eyebrow ? <p className="text-xs leading-4 capitalize text-[var(--muted)]">{group.eyebrow}</p> : null}
           </div>
           <ul className="grid gap-1 text-sm leading-5 text-[var(--text)]">
             {group.items.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item.text} className="grid gap-1">
+                <span>{item.text}</span>
+                {item.links ? (
+                  <span className="flex flex-wrap gap-4 text-xs leading-4">
+                    {item.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[var(--muted)] no-underline hover:text-[var(--text)]"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </span>
+                ) : null}
+              </li>
             ))}
           </ul>
         </article>
@@ -446,9 +692,9 @@ function HomePage() {
       <section className="grid gap-12">
         <p className="text-sm leading-5 text-[var(--text)]">
           I build AI-first product workflows, React/Next systems, and hackathon prototypes from Navi Mumbai.
-          Since Apr 2026 I have been building with JS Community India; since Jun 2026 I am on the MacD
-          SDE arc. Current operating mode: automate the boring part, ship the demo before the group chat
-          overthinks it, then make the workflow less cursed.
+          Since May 2026, I&apos;ve been building full-stack product systems at Noun Asia, currently shipping
+          on MacD. I also build with JS Community India and turn workflow chaos into something users can
+          actually click.
         </p>
 
         <LinkGrid links={profileLinks} />
@@ -463,8 +709,8 @@ function WorkPage() {
       <div className="grid gap-4">
         <h1 className="text-lg font-bold leading-5 text-[var(--text)]">Work</h1>
         <p className="text-sm leading-5 text-[var(--text)]">
-          A practical track record across AI video generation, workflow automation, community work, and side projects
-          that made it out of localhost.
+          I&apos;ve worked across AI video generation, workflow automation, community work, and public side
+          projects that escaped localhost with receipts.
         </p>
       </div>
 
@@ -500,8 +746,8 @@ function ProofPage() {
       <div className="grid gap-4">
         <h1 className="text-lg font-bold leading-5 text-[var(--text)]">Proof</h1>
         <p className="text-sm leading-5 text-[var(--text)]">
-          The receipts page: technical range, academic track, hackathon outcomes, talks, and the links people
-          actually ask for.
+          This is the receipts page: skills, education, wins, talks, and links for anyone trying to verify
+          that I do, in fact, touch grass and ship software.
         </p>
       </div>
 

@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import type { Plugin, ViteDevServer } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, statSync } from 'node:fs'
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import { dirname, join } from 'node:path'
+import { join, resolve, sep } from 'node:path'
 
 function preserveRootAssets(): Plugin {
   const sourceDir = join(process.cwd(), 'assets')
@@ -14,16 +14,24 @@ function preserveRootAssets(): Plugin {
     name: 'preserve-root-assets',
     configureServer(server: ViteDevServer) {
       server.middlewares.use('/assets', (request: IncomingMessage, response: ServerResponse, next: () => void) => {
-        const pathname = request.url?.split('?')[0]?.replace(/^\/+/, '')
+        const encodedPathname = request.url?.split('?')[0]
 
-        if (!pathname || pathname.includes('..')) {
+        if (!encodedPathname) {
           next()
           return
         }
 
-        const assetPath = join(sourceDir, pathname)
+        let pathname: string
+        try {
+          pathname = decodeURIComponent(encodedPathname).replace(/^\/+/, '')
+        } catch {
+          next()
+          return
+        }
 
-        if (!existsSync(assetPath) || !statSync(assetPath).isFile()) {
+        const assetPath = resolve(sourceDir, pathname)
+
+        if (!assetPath.startsWith(`${sourceDir}${sep}`) || !existsSync(assetPath) || !statSync(assetPath).isFile()) {
           next()
           return
         }
@@ -37,17 +45,7 @@ function preserveRootAssets(): Plugin {
 
       if (existsSync(sourceDir)) {
         const outputDir = join(distDir, 'assets')
-        mkdirSync(outputDir, { recursive: true })
-
-        for (const filename of readdirSync(sourceDir)) {
-          const sourcePath = join(sourceDir, filename)
-
-          if (statSync(sourcePath).isFile()) {
-            const targetPath = join(outputDir, filename)
-            mkdirSync(dirname(targetPath), { recursive: true })
-            copyFileSync(sourcePath, targetPath)
-          }
-        }
+        cpSync(sourceDir, outputDir, { recursive: true })
       }
 
       const indexPath = join(distDir, 'index.html')
