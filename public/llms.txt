@@ -1,6 +1,6 @@
 # Sahil Shahaji Kadam
 
-> AI-first product workflow builder, React and workflow engineer, JS Community India contributor, and Software Development Engineer at MacD.
+> AI-first product workflow builder, Full Stack Developer at Noun Asia working on the MacD project, and JS Community India community builder.
 
 This site is the personal portfolio of Sahil Shahaji Kadam.
 
@@ -17,13 +17,13 @@ Sahil Shahaji Kadam builds AI-first product workflows, React and Next.js systems
 
 ## Current Roles
 
-- Software Development Engineer at MacD, Jun 2026 to present
+- Full Stack Developer at Noun Asia, working on the MacD project, May 2026 to present
 - Community Builder at JS Community India, Apr 2026 to present
 
 ## Previous Experience
 
-- Software Development Engineer Intern at LetsUpgrade, Aug 2025 to May 2026
-- Project Intern at LetsUpgrade, Dec 2024 to Mar 2025
+- Software Development Engineer Intern at LetsUpgrade, 4 Aug 2025 to 7 May 2026
+- Project Intern at LetsUpgrade, Dec 2024 and Feb to Mar 2025
 
 ## Primary Topics
 
