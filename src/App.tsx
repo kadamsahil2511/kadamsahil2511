@@ -34,7 +34,7 @@ const routes: Record<RoutePath, { label: string; title: string; description: str
     label: 'Home',
     title: 'Sahil Shahaji Kadam',
     description:
-      'Sahil Shahaji Kadam is a Navi Mumbai AI-first builder, Full Stack Developer at Noun Asia, MacD project contributor, and JS Community India community builder.',
+      'Sahil Shahaji Kadam is a Mumbai AI-first builder, Full Stack Developer at Noun Asia, MacD project contributor, and JS Community India community builder.',
   },
   '/work/': {
     label: 'Work',
@@ -691,7 +691,7 @@ function HomePage() {
     <main className="grid gap-12">
       <section className="grid gap-12">
         <p className="text-sm leading-5 text-[var(--text)]">
-          I build AI-first product workflows, React/Next systems, and hackathon prototypes from Navi Mumbai.
+          I build AI-first product workflows, React/Next systems, and hackathon prototypes from Mumbai.
           Since May 2026, I&apos;ve been building full-stack product systems at Noun Asia, currently shipping
           on MacD. I also build with JS Community India and turn workflow chaos into something users can
           actually click.

@@ -13,7 +13,7 @@ This site is the personal portfolio of Sahil Shahaji Kadam.
 
 ## About
 
-Sahil Shahaji Kadam builds AI-first product workflows, React and Next.js systems, automation tools, and hackathon prototypes from Navi Mumbai, India.
+Sahil Shahaji Kadam builds AI-first product workflows, React and Next.js systems, automation tools, and hackathon prototypes from Mumbai, India.
 
 ## Current Roles
 
