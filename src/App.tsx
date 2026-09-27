@@ -44,7 +44,7 @@ const routes: Record<RoutePath, { label: string; title: string; description: str
   '/proof/': {
     label: 'Proof',
     title: 'Proof - Sahil Shahaji Kadam',
-    description: 'Skills, education, achievements, talks, and links for Sahil Shahaji Kadam.',
+    description: 'Skills, education, certifications, achievements, talks, and links for Sahil Shahaji Kadam.',
   },
 }
 
@@ -167,6 +167,20 @@ const skills: RowItem[] = [
     description: 'RAG, vector databases, prompt engineering, LangChain, OpenAI APIs, Gemini APIs, NLP',
   },
   { title: 'Databases', description: 'MongoDB, MySQL, PostgreSQL, SQLite, Prisma, Firestore' },
+]
+
+const certifications: RowItem[] = [
+  {
+    title: 'AWS Cloud Practitioner Essentials',
+    description: 'AWS Training & Certification completion certificate.',
+    meta: 'Completed 3 Dec 2025',
+    links: [
+      {
+        label: 'View certificate',
+        href: '/assets/Proof%20of%20work/certifications/2025-12-aws-cloud-practitioner-essentials/certificate.pdf',
+      },
+    ],
+  },
 ]
 
 const achievements: RowItem[] = [
@@ -746,8 +760,8 @@ function ProofPage() {
       <div className="grid gap-4">
         <h1 className="text-lg font-bold leading-5 text-[var(--text)]">Proof</h1>
         <p className="text-sm leading-5 text-[var(--text)]">
-          This is the receipts page: skills, education, wins, talks, and links for anyone trying to verify
-          that I do, in fact, touch grass and ship software.
+          This is the receipts page: skills, education, certifications, wins, talks, and links for anyone
+          trying to verify that I do, in fact, touch grass and ship software.
         </p>
       </div>
 
@@ -761,6 +775,10 @@ function ProofPage() {
 
       <Section title="Education">
         <Rows items={education} />
+      </Section>
+
+      <Section title="Certifications">
+        <Rows items={certifications} />
       </Section>
 
       <Section title="Achievements">

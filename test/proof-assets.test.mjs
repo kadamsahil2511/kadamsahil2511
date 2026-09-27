@@ -5,6 +5,7 @@ import test from 'node:test'
 
 const sourceDir = join(process.cwd(), 'assets', 'Proof of work')
 const outputDir = join(process.cwd(), 'dist', 'assets', 'Proof of work')
+const awsCertificate = join('certifications', '2025-12-aws-cloud-practitioner-essentials', 'certificate.pdf')
 
 function pdfsIn(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -20,4 +21,9 @@ test('the production build publishes every proof document', () => {
   for (const file of proofFiles) {
     assert.ok(existsSync(join(outputDir, relative(sourceDir, file))), `missing ${relative(sourceDir, file)}`)
   }
+})
+
+test('the AWS Cloud Practitioner Essentials certificate is published', () => {
+  assert.ok(existsSync(join(sourceDir, awsCertificate)), 'missing source certificate')
+  assert.ok(existsSync(join(outputDir, awsCertificate)), 'missing built certificate')
 })
