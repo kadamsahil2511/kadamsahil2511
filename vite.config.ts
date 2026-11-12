@@ -8,7 +8,7 @@ import { join, resolve, sep } from 'node:path'
 
 function preserveRootAssets(): Plugin {
   const sourceDir = join(process.cwd(), 'assets')
-  const staticRoutes = ['work', 'proof']
+  const staticRoutes = ['work', 'proof', 'research', 'view']
 
   return {
     name: 'preserve-root-assets',
@@ -36,7 +36,13 @@ function preserveRootAssets(): Plugin {
           return
         }
 
-        response.setHeader('Content-Type', 'application/pdf')
+        const extension = pathname.split('.').pop()?.toLowerCase()
+        const types: Record<string, string> = {
+          pdf: 'application/pdf',
+          mp4: 'video/mp4',
+          pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        }
+        response.setHeader('Content-Type', types[extension ?? ''] ?? 'application/octet-stream')
         response.end(readFileSync(assetPath))
       })
     },

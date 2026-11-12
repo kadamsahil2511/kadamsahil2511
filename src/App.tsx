@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type MouseEvent, type ReactNode } from 'react'
+import { PdfViewer } from './PdfViewer'
+import { isAssetPdf, viewerPath } from './pdf'
 
-type RoutePath = '/' | '/work/' | '/proof/'
+type RoutePath = '/' | '/work/' | '/proof/' | '/research/' | '/view/'
 type Theme = 'light' | 'dark'
 
 type LinkItem = {
@@ -34,7 +36,7 @@ const routes: Record<RoutePath, { label: string; title: string; description: str
     label: 'Home',
     title: 'Sahil Shahaji Kadam',
     description:
-      'Sahil Shahaji Kadam is a Mumbai AI-first builder, Full Stack Developer at Noun Asia, MacD project contributor, and JS Community India community builder.',
+      'Sahil Shahaji Kadam is a Mumbai AI-first builder, JS Community India community builder, and author of an ASIFA-awarded agentic farming paper.',
   },
   '/work/': {
     label: 'Work',
@@ -45,6 +47,17 @@ const routes: Record<RoutePath, { label: string; title: string; description: str
     label: 'Proof',
     title: 'Proof - Sahil Shahaji Kadam',
     description: 'Skills, education, certifications, achievements, talks, and links for Sahil Shahaji Kadam.',
+  },
+  '/research/': {
+    label: 'Research',
+    title: 'Research - Sahil Shahaji Kadam',
+    description:
+      'PAMC: Autonomous Agentic Systems for Hyper-Personalized Microgreens Cultivation, ASIFA Best External Paper Award.',
+  },
+  '/view/': {
+    label: 'Document',
+    title: 'Document - Sahil Shahaji Kadam',
+    description: 'PDF viewer with download and share.',
   },
 }
 
@@ -61,8 +74,8 @@ const experience: RowItem[] = [
   {
     title: 'Full Stack Developer, Noun Asia',
     description:
-      'Building full-stack product systems for the MacD project, owning features from workflow design and implementation through production debugging and delivery.',
-    meta: '8 May 2026 - Present',
+      'Built full-stack product systems for the MacD project and three other B2B products, owning features from workflow design and implementation through production debugging and delivery.',
+    meta: '8 May 2026 - Nov 2026',
   },
   {
     title: 'Community Builder, JS Community India',
@@ -86,6 +99,50 @@ const experience: RowItem[] = [
 ]
 
 const projects: RowItem[] = [
+  {
+    title: 'P1 Assistant',
+    description:
+      'Self-hosted WhatsApp AI assistant with Mastra workflows, FastAPI retrieval, Qdrant search, source citations, and per-user memory. Guest chat works without sign-in.',
+    meta: 'TypeScript, Python, Mastra, FastAPI, Qdrant, Docker',
+    links: [
+      { label: 'Live', href: 'https://p1.kadamsahil.com' },
+      { label: 'Guest chat', href: 'https://p1.kadamsahil.com#try' },
+      { label: 'Repository', href: 'https://github.com/kadamsahil2511/p1' },
+    ],
+  },
+  {
+    title: 'PAMC microgreens paper',
+    description:
+      'ASIFA Best External Paper. Three-layer agentic architecture where an LLM supervisor coordinates IoT perception, vision, and actuation for plant-level urban farming.',
+    meta: 'Jan 2026 · with R. Mishra and K. Solanki',
+    links: [
+      { label: 'Paper, video, slides', href: '/research/' },
+      {
+        label: 'View paper',
+        href: '/assets/research/pamc-paper.pdf',
+      },
+    ],
+  },
+  {
+    title: 'PageTrace',
+    description:
+      'Offline PDF RAG with page-aware chunking, FAISS and Chroma paths, cross-encoder reranking, and tests for citation context and index repair.',
+    meta: 'Python, FAISS, Chroma, Nomic, Ollama',
+    links: [{ label: 'Repository', href: 'https://github.com/kadamsahil2511/pagetrace' }],
+  },
+  {
+    title: 'Persistent Memory Assistant',
+    description:
+      'Local Gemini chat that stores memories as fact, instruction, transient, or secret in Mem0 and Qdrant, with a facts vs instructions UI and file RAG.',
+    meta: 'Python, FastAPI, Mem0, Qdrant, React',
+    links: [{ label: 'Repository', href: 'https://github.com/kadamsahil2511/memory-assistant' }],
+  },
+  {
+    title: 'SuperUserz F2',
+    description:
+      'Financial digital twin: 32-dim behavioral DNA, versioned user state, Monte Carlo stress tests, adaptive LLM interview, contradiction checks, and proactive interventions.',
+    meta: 'FastAPI, React, React Native, PostgreSQL, Redis',
+  },
   {
     title: 'SuperUserz-Inference',
     description:
@@ -196,8 +253,12 @@ const achievements: RowItem[] = [
   },
   {
     title: 'International ASIFA Student Research Paper Conference',
-    description: 'Best External Paper Award.',
+    description: 'Best External Paper Award for the PAMC microgreens cultivation paper.',
     meta: 'Jan 2026',
+    links: [
+      { label: 'Paper', href: '/assets/research/pamc-paper.pdf' },
+      { label: 'Research page', href: '/research/' },
+    ],
   },
   { title: 'Imagine Hackathon at PANIIT', description: 'Top 30 teams out of 15,000.', meta: 'Jan 2025' },
   { title: 'Elevator Pitch Competition, ITM Business School', description: '1st Place.', meta: 'Oct 2024' },
@@ -219,6 +280,11 @@ const talks: RowItem[] = [
 ]
 
 const workTimeline: TimelineGroup[] = [
+  {
+    label: 'Nov 2026',
+    eyebrow: 'left',
+    items: [{ text: 'Left Noun Asia after shipping full-stack product work across MacD and other B2B clients.' }],
+  },
   {
     label: '8 May 2026',
     eyebrow: 'full-time job',
@@ -441,6 +507,8 @@ const proofTimeline: TimelineGroup[] = [
             label: 'Award certificate',
             href: '/assets/Proof%20of%20work/achievements/2026-01-asifa-research/certificate.pdf',
           },
+          { label: 'Paper', href: '/assets/research/pamc-paper.pdf' },
+          { label: 'Video', href: '/research/' },
         ],
       },
       {
@@ -508,29 +576,46 @@ function normalizePath(pathname: string): RoutePath {
     return '/proof/'
   }
 
+  if (pathname.startsWith('/research')) {
+    return '/research/'
+  }
+
+  if (pathname.startsWith('/view')) {
+    return '/view/'
+  }
+
   return '/'
 }
 
 function isExternalLink(href: string) {
-  return href.startsWith('http') || href.startsWith('mailto:')
+  return href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')
+}
+
+function resolveHref(href: string) {
+  return isAssetPdf(href) ? viewerPath(href) : href
 }
 
 function useRoute() {
   const [path, setPath] = useState<RoutePath>(() => normalizePath(window.location.pathname))
+  const [search, setSearch] = useState(() => window.location.search)
 
   useEffect(() => {
-    const onPopState = () => setPath(normalizePath(window.location.pathname))
+    const onPopState = () => {
+      setPath(normalizePath(window.location.pathname))
+      setSearch(window.location.search)
+    }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [])
 
-  const navigate = (nextPath: RoutePath) => {
+  const navigate = (nextPath: string) => {
     window.history.pushState(null, '', nextPath)
-    setPath(nextPath)
+    setPath(normalizePath(new URL(nextPath, window.location.origin).pathname))
+    setSearch(new URL(nextPath, window.location.origin).search)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  return { path, navigate }
+  return { path, search, navigate }
 }
 
 function useTheme() {
@@ -558,7 +643,7 @@ function useTheme() {
   return theme
 }
 
-function Header({ path, navigate }: { path: RoutePath; navigate: (path: RoutePath) => void }) {
+function Header({ path, navigate }: { path: RoutePath; navigate: (path: string) => void }) {
   return (
     <header className="flex items-start justify-between gap-6">
       <a
@@ -572,8 +657,8 @@ function Header({ path, navigate }: { path: RoutePath; navigate: (path: RoutePat
         Sahil Shahaji Kadam
       </a>
 
-      <nav className="flex shrink-0 gap-6 pt-[3px] text-xs leading-4" aria-label="Primary navigation">
-        {(['/work/', '/proof/'] as RoutePath[]).map((routePath) => (
+      <nav className="flex shrink-0 gap-4 pt-[3px] text-xs leading-4 sm:gap-6" aria-label="Primary navigation">
+        {(['/work/', '/proof/', '/research/'] as RoutePath[]).map((routePath) => (
           <a
             key={routePath}
             href={routePath}
@@ -589,27 +674,61 @@ function Header({ path, navigate }: { path: RoutePath; navigate: (path: RoutePat
             {routes[routePath].label}
           </a>
         ))}
-        <a href="/assets/Sahil_Shahaji_Kadam_CV.pdf" className="text-[var(--muted)] no-underline hover:text-[var(--text)]">
+        <SiteLink href="/assets/Sahil_Shahaji_Kadam_CV.pdf" navigate={navigate} className="text-[var(--muted)] no-underline hover:text-[var(--text)]">
           Resume
-        </a>
+        </SiteLink>
       </nav>
     </header>
   )
 }
 
-function LinkGrid({ links }: { links: LinkItem[] }) {
+function SiteLink({
+  href,
+  children,
+  className,
+  navigate,
+}: {
+  href: string
+  children: ReactNode
+  className: string
+  navigate: (path: string) => void
+}) {
+  const to = resolveHref(href)
+  const external = isExternalLink(to)
+
+  const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (external) {
+      return
+    }
+    event.preventDefault()
+    navigate(to)
+  }
+
+  return (
+    <a
+      href={to}
+      target={external && !href.startsWith('mailto:') && !href.startsWith('tel:') ? '_blank' : undefined}
+      rel={external && !href.startsWith('mailto:') && !href.startsWith('tel:') ? 'noreferrer' : undefined}
+      className={className}
+      onClick={onClick}
+    >
+      {children}
+    </a>
+  )
+}
+
+function LinkGrid({ links, navigate }: { links: LinkItem[]; navigate: (path: string) => void }) {
   return (
     <nav className="grid grid-cols-2 gap-x-8 gap-y-[10px] text-xs leading-4" aria-label="Profile links">
       {links.map(({ label, href }) => (
-        <a
+        <SiteLink
           key={href}
           href={href}
-          target={isExternalLink(href) && !href.startsWith('mailto:') ? '_blank' : undefined}
-          rel={isExternalLink(href) && !href.startsWith('mailto:') ? 'noreferrer' : undefined}
+          navigate={navigate}
           className="text-[var(--muted)] no-underline hover:text-[var(--text)]"
         >
           {label}
-        </a>
+        </SiteLink>
       ))}
     </nav>
   )
@@ -632,7 +751,7 @@ function Section({
   )
 }
 
-function Rows({ items }: { items: RowItem[] }) {
+function Rows({ items, navigate }: { items: RowItem[]; navigate: (path: string) => void }) {
   return (
     <div className="grid gap-5">
       {items.map((item) => (
@@ -643,15 +762,14 @@ function Rows({ items }: { items: RowItem[] }) {
             {item.links ? (
               <p className="mt-1 flex flex-wrap gap-4 text-xs leading-4">
                 {item.links.map((link) => (
-                  <a
+                  <SiteLink
                     key={link.href}
                     href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
+                    navigate={navigate}
                     className="text-[var(--muted)] no-underline hover:text-[var(--text)]"
                   >
                     {link.label}
-                  </a>
+                  </SiteLink>
                 ))}
               </p>
             ) : null}
@@ -663,7 +781,7 @@ function Rows({ items }: { items: RowItem[] }) {
   )
 }
 
-function MonthTimeline({ groups }: { groups: TimelineGroup[] }) {
+function MonthTimeline({ groups, navigate }: { groups: TimelineGroup[]; navigate: (path: string) => void }) {
   return (
     <div className="grid gap-5">
       {groups.map((group) => (
@@ -679,15 +797,14 @@ function MonthTimeline({ groups }: { groups: TimelineGroup[] }) {
                 {item.links ? (
                   <span className="flex flex-wrap gap-4 text-xs leading-4">
                     {item.links.map((link) => (
-                      <a
+                      <SiteLink
                         key={link.href}
                         href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
+                        navigate={navigate}
                         className="text-[var(--muted)] no-underline hover:text-[var(--text)]"
                       >
                         {link.label}
-                      </a>
+                      </SiteLink>
                     ))}
                   </span>
                 ) : null}
@@ -700,50 +817,57 @@ function MonthTimeline({ groups }: { groups: TimelineGroup[] }) {
   )
 }
 
-function HomePage() {
+function HomePage({ navigate }: { navigate: (path: string) => void }) {
   return (
     <main className="grid gap-12">
       <section className="grid gap-12">
         <p className="text-sm leading-5 text-[var(--text)]">
-          I build AI-first product workflows, React/Next systems, and hackathon prototypes from Mumbai.
-          Since May 2026, I&apos;ve been building full-stack product systems at Noun Asia, currently shipping
-          on MacD. I also build with JS Community India and turn workflow chaos into something users can
-          actually click.
+          I build AI-first product workflows, React/Next systems, and research prototypes from Mumbai. I spent
+          May–Nov 2026 shipping full-stack product systems at Noun Asia, including MacD. I also build with JS
+          Community India, and I ship agents people can try — including{' '}
+          <SiteLink href="https://p1.kadamsahil.com#try" navigate={navigate} className="text-[var(--text)] underline">
+            P1 guest chat
+          </SiteLink>{' '}
+          and an{' '}
+          <SiteLink href="/research/" navigate={navigate} className="text-[var(--text)] underline">
+            ASIFA-awarded paper
+          </SiteLink>{' '}
+          on agentic microgreens cultivation.
         </p>
 
-        <LinkGrid links={profileLinks} />
+        <LinkGrid links={profileLinks} navigate={navigate} />
       </section>
     </main>
   )
 }
 
-function WorkPage() {
+function WorkPage({ navigate }: { navigate: (path: string) => void }) {
   return (
     <main className="grid gap-10">
       <div className="grid gap-4">
         <h1 className="text-lg font-bold leading-5 text-[var(--text)]">Work</h1>
         <p className="text-sm leading-5 text-[var(--text)]">
-          I&apos;ve worked across AI video generation, workflow automation, community work, and public side
-          projects that escaped localhost with receipts.
+          I&apos;ve worked across AI video generation, retrieval and memory prototypes, workflow automation,
+          community work, and public side projects that escaped localhost with receipts.
         </p>
       </div>
 
       <Section title="Timeline">
-        <MonthTimeline groups={workTimeline} />
+        <MonthTimeline groups={workTimeline} navigate={navigate} />
       </Section>
 
       <Section title="Experience">
-        <Rows items={experience} />
+        <Rows items={experience} navigate={navigate} />
       </Section>
 
       <Section title="Projects">
-        <Rows items={projects} />
+        <Rows items={projects} navigate={navigate} />
       </Section>
     </main>
   )
 }
 
-function ProofPage() {
+function ProofPage({ navigate }: { navigate: (path: string) => void }) {
   const education = useMemo<RowItem[]>(
     () => [
       {
@@ -766,40 +890,86 @@ function ProofPage() {
       </div>
 
       <Section title="Timeline">
-        <MonthTimeline groups={proofTimeline} />
+        <MonthTimeline groups={proofTimeline} navigate={navigate} />
       </Section>
 
       <Section title="Skills">
-        <Rows items={skills} />
+        <Rows items={skills} navigate={navigate} />
       </Section>
 
       <Section title="Education">
-        <Rows items={education} />
+        <Rows items={education} navigate={navigate} />
       </Section>
 
       <Section title="Certifications">
-        <Rows items={certifications} />
+        <Rows items={certifications} navigate={navigate} />
       </Section>
 
       <Section title="Achievements">
-        <Rows items={achievements} />
+        <Rows items={achievements} navigate={navigate} />
       </Section>
 
       <Section title="Talks">
-        <Rows items={talks} />
+        <Rows items={talks} navigate={navigate} />
       </Section>
 
       <Section title="Links">
-        <LinkGrid links={profileLinks} />
+        <LinkGrid links={profileLinks} navigate={navigate} />
+      </Section>
+    </main>
+  )
+}
+
+function ResearchPage({ navigate }: { navigate: (path: string) => void }) {
+  return (
+    <main className="grid gap-10">
+      <div className="grid gap-4">
+        <h1 className="text-lg font-bold leading-5 text-[var(--text)]">
+          Autonomous Agentic Systems for Hyper-Personalized Microgreens Cultivation
+        </h1>
+        <p className="text-xs leading-4 text-[var(--muted)]">
+          ASIFA Student Research Conference 2025-26 · Best External Paper Award · Jan 2026
+        </p>
+        <p className="text-sm leading-5 text-[var(--text)]">
+          Sahil Kadam, Ramjee Mishra, and Krishiv Solanki. Guided by Prof. Mrs. Vinaya Kulkarni, ITM Skills
+          University.
+        </p>
+        <p className="text-sm leading-5 text-[var(--text)]">
+          PAMC is a three-layer agentic architecture where an LLM supervisor coordinates IoT perception, vision,
+          and actuation for plant-level urban farming. Four sub-agents cover electrochemical sensing, atmosphere,
+          phenotypic vision, and a natural-language central supervisor.
+        </p>
+        <p className="flex flex-wrap gap-4 text-xs leading-4">
+          <SiteLink
+            href="/assets/research/pamc-paper.pdf"
+            navigate={navigate}
+            className="text-[var(--muted)] no-underline hover:text-[var(--text)]"
+          >
+            View paper
+          </SiteLink>
+          <a
+            href="/assets/research/pamc-slides.pptx"
+            className="text-[var(--muted)] no-underline hover:text-[var(--text)]"
+          >
+            Download slides
+          </a>
+        </p>
+      </div>
+
+      <Section title="Talk">
+        <video className="w-full" controls preload="metadata" src="/assets/research/pamc-talk.mp4">
+          <a href="/assets/research/pamc-talk.mp4">Download the research talk</a>
+        </video>
       </Section>
     </main>
   )
 }
 
 function App() {
-  const { path, navigate } = useRoute()
+  const { path, search, navigate } = useRoute()
   useTheme()
   const route = routes[path]
+  const viewerWide = path === '/view/'
 
   useEffect(() => {
     document.title = route.title
@@ -811,11 +981,28 @@ function App() {
   }, [route])
 
   return (
-    <div className="mx-auto grid min-h-screen w-full max-w-[512px] content-start gap-12 px-8 py-[52px]">
+    <div
+      className={`mx-auto grid min-h-screen w-full content-start gap-12 px-8 py-[52px] ${
+        viewerWide ? 'max-w-[720px]' : 'max-w-[512px]'
+      }`}
+    >
       <Header path={path} navigate={navigate} />
-      {path === '/' ? <HomePage /> : null}
-      {path === '/work/' ? <WorkPage /> : null}
-      {path === '/proof/' ? <ProofPage /> : null}
+      {path === '/' ? <HomePage navigate={navigate} /> : null}
+      {path === '/work/' ? <WorkPage navigate={navigate} /> : null}
+      {path === '/proof/' ? <ProofPage navigate={navigate} /> : null}
+      {path === '/research/' ? <ResearchPage navigate={navigate} /> : null}
+      {path === '/view/' ? (
+        <PdfViewer
+          search={search}
+          onBack={() => {
+            if (window.history.length > 1) {
+              window.history.back()
+              return
+            }
+            navigate('/research/')
+          }}
+        />
+      ) : null}
     </div>
   )
 }
